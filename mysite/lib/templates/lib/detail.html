@@ -1,0 +1,26 @@
+<h1>Book List</h1>
+<table>
+	<tr>
+		<td>Book Name</td>
+		<td>Author</td>
+		<td>pub_house</td>
+		<td>pub_date</td>
+	</tr>
+{% for book in book_list.all %}
+	<tr>
+		<td>{{ book.name }}</td>
+		<td>{{ book.author }}</td>
+		<td>{{ book.pub_house }}</td>
+		<td>{{ book.pub_date }}</td>
+		<td><a href="{% url 'lib:delBook' book.id %}">delete</a></td>
+	</tr>
+{% endfor %}
+
+</table>
+<form action="{% url 'lib:addBook' %}"  method="post" name="addBook">
+	{% csrf_token %}
+	<p><span>Book Name: </span><input type="text" name="name"></p>
+	<p><span>Author Name: </span><input type="text" name="author"></p>
+	<p><span>pub house: </span><input type="text" name="pub_house"></p>
+	<input type="submit" value="Add">
+</form>
